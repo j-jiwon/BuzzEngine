@@ -1,4 +1,4 @@
-//
+﻿//
 //  File: Game.cpp
 //  Author: Jiwon Jung (devziwon@gmail.com)
 //
@@ -7,13 +7,14 @@
 
 #include "pch.h"
 #include "Game.h"
-#include "EnginePch.h"
+#include "Engine.h"
 
-void Game::Init()
+void Game::Init(const WindowInfo& info)
 {
-	BuzzEngine();
+	GEngine->Init(info);
 }
 
 void Game::Update()
 {
+	GEngine->Render();
 }
