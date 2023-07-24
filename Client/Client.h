@@ -1,4 +1,4 @@
-//
+﻿//
 //  File: Client.h
 //  Author: Jiwon Jung (devziwon@gmail.com)
 //

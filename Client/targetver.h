@@ -1,4 +1,4 @@
-//
+﻿//
 //  File: targetver.h
 //  Author: Jiwon Jung (devziwon@gmail.com)
 //
