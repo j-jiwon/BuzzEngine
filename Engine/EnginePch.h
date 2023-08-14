@@ -109,11 +109,6 @@ struct Vertex
 	Vec2 uv;
 };
 
-struct Transform
-{
-	Vec4 offset;
-};
-
 // 자주 사용하게 될 친구들 define 으로 빼둔다
 #define DEVICE					GEngine->GetDevice()->GetDevice()
 #define CMD_LIST				GEngine->GetCmdQueue()->GetCmdList()
