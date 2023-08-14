@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
-// ¿¬»ê ÇÏ´Â Áß°£ °úÁ¤À» ÀúÀåÇÏ´Â ¿ëµµ·Î È°¿ë
+// ì—°ì‚° í•˜ëŠ” ì¤‘ê°„ ê³¼ì •ì„ ì €ì¥í•˜ëŠ” ìš©ë„ë¡œ í™œìš©
 class DepthStencilBuffer
 {
 public:
-	void Init(const WindowInfo& window, DXGI_FORMAT dsvFormat = DXGI_FORMAT_D32_FLOAT);  // d24 s8 Ã³·³ ½ºÅÙ½Ç »ç¿ëÇÏ´Â Æ÷¸Ëµµ ÀÖÀ½
+	void Init(const WindowInfo& window, DXGI_FORMAT dsvFormat = DXGI_FORMAT_D32_FLOAT);  // d24 s8 ì²˜ëŸ¼ ìŠ¤í…ì‹¤ ì‚¬ìš©í•˜ëŠ” í¬ë§·ë„ ìˆìŒ
 
 	D3D12_CPU_DESCRIPTOR_HANDLE	GetDSVCpuHandle() { return _dsvHandle; }
 	DXGI_FORMAT GetDSVFormat() { return _dsvFormat; }

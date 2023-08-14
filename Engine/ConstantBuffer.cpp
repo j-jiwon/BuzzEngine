@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ConstantBuffer.h"
 #include "Engine.h"
 
@@ -19,7 +19,7 @@ ConstantBuffer::~ConstantBuffer()
 
 void ConstantBuffer::Init(uint32 size, uint32 count)
 {
-	// »ó¼ö ¹öÆÛ´Â 256 ¹ÙÀÌÆ® ¹è¼ö·Î ¸¸µé¾î¾ß ÇÑ´Ù
+	// ìƒìˆ˜ ë²„í¼ëŠ” 256 ë°”ì´íŠ¸ ë°°ìˆ˜ë¡œ ë§Œë“¤ì–´ì•¼ í•œë‹¤
 	// 0 256 512 768
 	_elementSize = (size + 255) & ~255;
 	_elementCount = count;

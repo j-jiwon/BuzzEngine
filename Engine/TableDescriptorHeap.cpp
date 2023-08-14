@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "TableDescriptorHeap.h"
 #include "Engine.h"
 
@@ -40,7 +40,7 @@ void TableDescriptorHeap::SetSRV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGI
 	DEVICE->CopyDescriptors(1, &destHandle, &destRange, 1, &srcHandle, &srcRange, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
-// À§·Î ¿Ã·Áº¸³»´Â ÀÏÀ» ÇÔ. ÇöÀç ³»°¡ ¾²´Â ±×·ì ÀÎµ¦½º·Î.
+// ìœ„ë¡œ ì˜¬ë ¤ë³´ë‚´ëŠ” ì¼ì„ í•¨. í˜„ìž¬ ë‚´ê°€ ì“°ëŠ” ê·¸ë£¹ ì¸ë±ìŠ¤ë¡œ.
 void TableDescriptorHeap::CommitTable()
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE handle = _descHeap->GetGPUDescriptorHandleForHeapStart();

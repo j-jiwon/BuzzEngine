@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Texture.h"
 #include "Engine.h"
 
@@ -11,10 +11,10 @@ void Texture::Init(const wstring& path)
 
 void Texture::CreateTexture(const wstring& path)
 {
-	// ÆÄÀÏ È®ÀåÀÚ ¾ò±â
+	// íŒŒì¼ í™•ì¥ì ì–»ê¸°
 	wstring ext = fs::path(path).extension();
 
-	// È®ÀåÀÚ·Î ÀÌ¹ÌÁö °¡Á®¿È
+	// í™•ì¥ìë¡œ ì´ë¯¸ì§€ ê°€ì ¸ì˜´
 	if (ext == L".dds" || ext == L".DDS")
 		::LoadFromDDSFile(path.c_str(), DDS_FLAGS_NONE, nullptr, _image);
 	else if (ext == L".tga" || ext == L".TGA")
@@ -22,14 +22,14 @@ void Texture::CreateTexture(const wstring& path)
 	else // png, jpg, jpeg, bmp
 		::LoadFromWICFile(path.c_str(), WIC_FLAGS_NONE, nullptr, _image);
 
-	// ¿øº» ÆÄÀÏ·Î texture ¸¦ ¸¸µê. ÅØ½ºÃÄ´Â comptr ¸®¼Ò½º·Î µÇ¾îÀÖÀ½. -> gpu ¿µ¿ª¿¡ ¸¸µé¾îÁü
+	// ì›ë³¸ íŒŒì¼ë¡œ texture ë¥¼ ë§Œë“¦. í…ìŠ¤ì³ëŠ” comptr ë¦¬ì†ŒìŠ¤ë¡œ ë˜ì–´ìˆìŒ. -> gpu ì˜ì—­ì— ë§Œë“¤ì–´ì§
 	HRESULT hr = ::CreateTexture(DEVICE.Get(), _image.GetMetadata(), &_tex2D);
 	if (FAILED(hr))
 		assert(nullptr);
 
 	vector<D3D12_SUBRESOURCE_DATA> subResources;
 
-	// ¾÷·Îµå ÁØºñ
+	// ì—…ë¡œë“œ ì¤€ë¹„
 	hr = ::PrepareUpload(DEVICE.Get(),
 		_image.GetImages(),
 		_image.GetImageCount(),
@@ -42,9 +42,9 @@ void Texture::CreateTexture(const wstring& path)
 	const uint64 bufferSize = ::GetRequiredIntermediateSize(_tex2D.Get(), 0, static_cast<uint32>(subResources.size()));
 
 	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
-	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);  // ¹öÆÛ »ı¼º
+	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);  // ë²„í¼ ìƒì„±
 
-	// ¾÷·Îµå Èü »ı¼º
+	// ì—…ë¡œë“œ í™ ìƒì„±
 	ComPtr<ID3D12Resource> textureUploadHeap;
 	hr = DEVICE->CreateCommittedResource(
 		&heapProperty,
@@ -57,7 +57,7 @@ void Texture::CreateTexture(const wstring& path)
 	if (FAILED(hr))
 		assert(nullptr);
 
-	// ½ÇÁ¦ ¾÷·Îµå
+	// ì‹¤ì œ ì—…ë¡œë“œ
 	::UpdateSubresources(RESOURCE_CMD_LIST.Get(),
 		_tex2D.Get(),
 		textureUploadHeap.Get(),

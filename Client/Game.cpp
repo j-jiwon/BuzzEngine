@@ -1,4 +1,4 @@
-﻿//
+//
 //  File: Game.cpp
 //  Author: Jiwon Jung (devziwon@gmail.com)
 //

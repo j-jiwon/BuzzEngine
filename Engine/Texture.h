@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class Texture
 {
@@ -12,9 +12,9 @@ public:
 	void CreateView();
 
 private:
-	ScratchImage			 		_image;  // texture ·ÎµåÇÏ´Â ºÎºÐ
+	ScratchImage			 		_image;  // texture ë¡œë“œí•˜ëŠ” ë¶€ë¶„
 	ComPtr<ID3D12Resource>			_tex2D;
 
-	ComPtr<ID3D12DescriptorHeap>	_srvHeap; // view ¸¸µå´Â ºÎºÐ
+	ComPtr<ID3D12DescriptorHeap>	_srvHeap; // view ë§Œë“œëŠ” ë¶€ë¶„
 	D3D12_CPU_DESCRIPTOR_HANDLE		_srvHandle;
 };
