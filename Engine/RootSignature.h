@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// [°è¾à¼­ / °áÀç]
+// [ê³„ì•½ì„œ / ê²°ìž¬]
 
 class RootSignature
 {

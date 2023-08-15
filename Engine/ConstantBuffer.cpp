@@ -17,9 +17,11 @@ ConstantBuffer::~ConstantBuffer()
 	}
 }
 
-void ConstantBuffer::Init(uint32 size, uint32 count)
+void ConstantBuffer::Init(CBV_REGISTER reg, uint32 size, uint32 count)
 {
-	// »ó¼ö ¹öÆÛ´Â 256 ¹ÙÀÌÆ® ¹è¼ö·Î ¸¸µé¾î¾ß ÇÑ´Ù
+	_reg = reg;
+
+	// ìƒìˆ˜ ë²„í¼ëŠ” 256 ë°”ì´íŠ¸ ë°°ìˆ˜ë¡œ ë§Œë“¤ì–´ì•¼ í•œë‹¤
 	// 0 256 512 768
 	_elementSize = (size + 255) & ~255;
 	_elementCount = count;
@@ -75,17 +77,17 @@ void ConstantBuffer::Clear()
 	_currentIndex = 0;
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(int32 rootParamIndex, void* buffer, uint32 size)
+void ConstantBuffer::PushData(void* buffer, uint32 size)
 {
-	assert(_currentIndex < _elementSize);
+	assert(_currentIndex < _elementCount);
+	assert(_elementSize == ((size + 255) & ~255));
 
 	::memcpy(&_mappedBuffer[_currentIndex * _elementSize], buffer, size);
 
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = GetCpuHandle(_currentIndex);
+	GEngine->GetTableDescHeap()->SetCBV(cpuHandle, _reg);
 
 	_currentIndex++;
-	
-	return cpuHandle;
 }
 
 D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetGpuVirtualAddress(uint32 index)

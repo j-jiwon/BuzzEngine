@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum class KEY_TYPE
 {
@@ -24,22 +24,24 @@ enum class KEY_STATE
 
 enum
 {
-	KEY_TYPE_COUNT = static_cast<int32>(UINT8_MAX),
+	KEY_TYPE_COUNT = static_cast<int32>(UINT8_MAX + 1),
 	KEY_STATE_COUNT = static_cast<int32>(KEY_STATE::END),
 };
 
-// keyboard ÀÔ·Â °¨Áö
+// keyboard ì…ë ¥ ê°ì§€
 class Input
 {
+	DECLARE_SINGLE(Input);
+
 public:
 	void Init(HWND hwnd);
 	void Update();
 
-	// ´©¸£°í ÀÖÀ» ¶§
+	// ëˆ„ë¥´ê³  ìˆì„ ë•Œ
 	bool GetButton(KEY_TYPE key) { return GetState(key) == KEY_STATE::PRESS; }
-	// ¸Ç Ã³À½ ´­·¶À» ¶§
+	// ë§¨ ì²˜ìŒ ëˆŒë €ì„ ë•Œ
 	bool GetButtonDown(KEY_TYPE key) { return GetState(key) == KEY_STATE::DOWN; }
-	// ¸Ç Ã³À½ ´­·¶´Ù ¶ÃÀ» ¶§
+	// ë§¨ ì²˜ìŒ ëˆŒë €ë‹¤ ë—ì„ ë•Œ
 	bool GetButtonUp(KEY_TYPE key) { return GetState(key) == KEY_STATE::UP; }
 
 private:
@@ -47,6 +49,6 @@ private:
 
 private:
 	HWND _hwnd;
-	vector<KEY_STATE> _states;  // state Ä³½Ì. ¸Å ÇÁ·¹ÀÓ¸¶´Ù´Â µ¿ÀÏÇÑ Å° ´­·È´Ù°í °¡Á¤.
+	vector<KEY_STATE> _states;  // state ìºì‹±. ë§¤ í”„ë ˆì„ë§ˆë‹¤ëŠ” ë™ì¼í•œ í‚¤ ëˆŒë ¸ë‹¤ê³  ê°€ì •.
 };
 

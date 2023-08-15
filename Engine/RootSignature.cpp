@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "RootSignature.h"
 #include "Engine.h"
 
@@ -20,7 +20,7 @@ void RootSignature::CreateRootSignature()
 	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
 
 	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(_countof(param), param, 1, &_samplerDesc);
-	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // ÀÔ·Â Á¶¸³±â ´Ü°è
+	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // ìž…ë ¥ ì¡°ë¦½ê¸° ë‹¨ê³„
 
 	ComPtr<ID3DBlob> blobSignature;
 	ComPtr<ID3DBlob> blobError;
