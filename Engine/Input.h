@@ -31,6 +31,8 @@ enum
 // keyboard 입력 감지
 class Input
 {
+	DECLARE_SINGLE(Input);
+
 public:
 	void Init(HWND hwnd);
 	void Update();
