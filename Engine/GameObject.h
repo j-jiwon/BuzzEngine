@@ -3,6 +3,7 @@
 
 class Transform;
 class MeshRenderer;
+class Camera;
 class MonoBehaviour;
 
 class GameObject : public enable_shared_from_this<GameObject>
@@ -11,14 +12,16 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	void Init();
-
 	void Awake();
 	void Start();
 	void Update();
 	void LateUpdate();
+	void FinalUpdate();
 
+	shared_ptr<Component> GetFixedComponent(COMPONENT_TYPE type);  // 공용코드 묶어두기 위함.
 	shared_ptr<Transform> GetTransform();
+	shared_ptr<MeshRenderer> GetMeshRenderer();
+	shared_ptr<Camera> GetCamera();
 
 	void AddComponent(shared_ptr<Component> component);
 

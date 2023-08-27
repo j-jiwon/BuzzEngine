@@ -8,5 +8,5 @@ public:
 	virtual ~MonoBehaviour();
 
 public:
-
+	virtual void FinalUpdate() sealed {};  // 구현하지 마시오.
 };

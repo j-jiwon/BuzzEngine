@@ -6,6 +6,10 @@
 #include "Material.h"
 #include "GameObject.h"
 #include "MeshRenderer.h"
+#include "Transform.h"
+#include "Camera.h"
+
+#include "TestCameraScript.h"
 
 void SceneManager::Update()
 {
@@ -14,6 +18,23 @@ void SceneManager::Update()
 
 	_activeScene->Update();
 	_activeScene->LateUpdate();
+	_activeScene->FinalUpdate();
+}
+
+// TEMP
+void SceneManager::Render()
+{
+	if (_activeScene == nullptr)
+		return;
+
+	const vector<shared_ptr<GameObject>>& gameObjects = _activeScene->GetGameObjects();
+	for (auto& gameObject : gameObjects)
+	{
+		if (gameObject->GetCamera() == nullptr)
+			continue;
+
+		gameObject->GetCamera()->Render();
+	}
 }
 
 void SceneManager::LoadScene(wstring sceneName)
@@ -32,7 +53,8 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 	// scene 생성
 	shared_ptr<Scene> scene = make_shared<Scene>();
 
-	// test object
+	// test object - 물체 만들고 좌표 세팅
+#pragma region TestObject
 	shared_ptr<GameObject> gameObject = make_shared<GameObject>();
 
 	vector<Vertex> vec(4);
@@ -60,8 +82,11 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 		indexVec.push_back(2);
 		indexVec.push_back(3);
 	}
+	gameObject->AddComponent(make_shared<Transform>());
+	shared_ptr<Transform> transform = gameObject->GetTransform();
+	transform->SetLocalPosition(Vec3(0.f, 100.f, 200.f));
+	transform->SetLocalScale(Vec3(100.f, 100.f, 1.f));
 
-	gameObject->Init();  // transform test
 	shared_ptr<MeshRenderer> meshRenderer = make_shared<MeshRenderer>();
 
 	{
@@ -87,8 +112,19 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 	}
 
 	gameObject->AddComponent(meshRenderer);
-
 	scene->AddGameObject(gameObject);
+#pragma endregion
+
+	// camera
+#pragma region Camera
+	shared_ptr<GameObject> camera = make_shared<GameObject>();
+	camera->AddComponent(make_shared<Transform>());
+	camera->AddComponent(make_shared<Camera>()); // near = 1, far = 100, fov = 45
+	camera->GetTransform()->SetLocalPosition(Vec3(0.f, 100.f, 0.f));
+	camera->AddComponent(make_shared<TestCameraScript>());
+
+	scene->AddGameObject(camera);
+#pragma endregion
 
 	return scene;
 }
