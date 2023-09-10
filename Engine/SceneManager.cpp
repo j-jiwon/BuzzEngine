@@ -80,7 +80,7 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 			shared_ptr<Shader> shader = make_shared<Shader>();
 			shared_ptr<Texture> texture = make_shared<Texture>();
 			shader->Init(L"..\\Resources\\Shader\\default.hlsli");
-			texture->Init(L"..\\Resources\\Texture\\lutz.webp");
+			texture->Init(L"..\\Resources\\Texture\\lutz.png");
 			shared_ptr<Material> material = make_shared<Material>();
 			material->SetShader(shader);
 			material->SetTexture(0, texture);
@@ -106,7 +106,7 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 			shared_ptr<Shader> shader = make_shared<Shader>();
 			shared_ptr<Texture> texture = make_shared<Texture>();
 			shader->Init(L"..\\Resources\\Shader\\default.hlsli");
-			texture->Init(L"..\\Resources\\Texture\\lutz.webp");
+			texture->Init(L"..\\Resources\\Texture\\lutz.png");
 			shared_ptr<Material> material = make_shared<Material>();
 			material->SetShader(shader);
 			material->SetTexture(0, texture);
