@@ -2,6 +2,7 @@
 
 enum class CONSTANT_BUFFER_TYPE : uint8
 {
+	GLOBAL, // global data - ex. lighting
 	TRANSFORM,
 	MATERIAL,
 	END  // for counting
@@ -23,6 +24,11 @@ public:
 
 	void Clear();
 	void PushData(void* buffer, uint32 size);
+
+	// gloabal data 위한 함수
+	// 세팅 한번만 해두고 사용할 것이므로 매번 clear, push 하지 않음
+	void SetGlobalData(void* buffer, uint32 data);
+
 
 	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(uint32 index);
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCpuHandle(uint32 index);
