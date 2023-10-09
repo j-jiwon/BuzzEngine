@@ -92,7 +92,7 @@ void ConstantBuffer::PushData(void* buffer, uint32 size)
 
 void ConstantBuffer::SetGlobalData(void* buffer, uint32 size)
 {
-	assert(_elementSize == ((size + 255) & -255));
+	assert(_elementSize == ((size + 255) & ~255));
 	::memcpy(&_mappedBuffer[0], buffer, size);
 	CMD_LIST->SetGraphicsRootConstantBufferView(0, GetGpuVirtualAddress(0));
 }
