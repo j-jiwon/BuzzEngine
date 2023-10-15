@@ -1,4 +1,4 @@
-﻿//
+//
 //  File: Game.h
 //  Author: Jiwon Jung (devziwon@gmail.com)
 //

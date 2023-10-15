@@ -57,33 +57,75 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 	scene->AddGameObject(camera);
 #pragma endregion
 
-#pragma region Cube
+#pragma region SkyBox
 	{
-		shared_ptr<GameObject> sphere = make_shared<GameObject>();
-		sphere->AddComponent(make_shared<Transform>());
-		sphere->GetTransform()->SetLocalScale(Vec3(100.f, 100.f, 100.f));
-		sphere->GetTransform()->SetLocalPosition(Vec3(0.f, 0.f, 150.f));
+		shared_ptr<GameObject> skybox = make_shared<GameObject>();
+		skybox->AddComponent(make_shared<Transform>());
 		shared_ptr<MeshRenderer> meshRenderer = make_shared<MeshRenderer>();
 		{
-			shared_ptr<Mesh> sphereMesh = GET_SINGLE(Resources)->LoadCubeMesh();
+			shared_ptr<Mesh> sphereMesh = GET_SINGLE(Resources)->LoadSphereMesh();
 			meshRenderer->SetMesh(sphereMesh);
 		}
 		{
 			shared_ptr<Shader> shader = make_shared<Shader>();
 			shared_ptr<Texture> texture = make_shared<Texture>();
-			shared_ptr<Texture> texture2 = make_shared<Texture>();
-			shader->Init(L"..\\Resources\\Shader\\default.hlsli");
-			texture->Init(L"..\\Resources\\Texture\\Metal.jpg");
-			texture2->Init(L"..\\Resources\\Texture\\Metal_Normal.jpg");
+			shader->Init(L"..\\Resources\\Shader\\skybox.hlsli",
+				{ RASTERIZER_TYPE::CULL_NONE, DEPTH_STENCIL_TYPE::LESS_EQUAL });
+			texture->Init(L"..\\Resources\\Texture\\Sky01.jpg");
 			shared_ptr<Material> material = make_shared<Material>();
 			material->SetShader(shader);
 			material->SetTexture(0, texture);
-			material->SetTexture(1, texture2);
 			meshRenderer->SetMaterial(material);
 		}
-		sphere->AddComponent(meshRenderer);
-		scene->AddGameObject(sphere);
+		skybox->AddComponent(meshRenderer);
+		scene->AddGameObject(skybox);
 	}
+#pragma endregion
+
+#pragma region Cube
+	{
+		shared_ptr<GameObject> sphere2 = make_shared<GameObject>();
+		sphere2->AddComponent(make_shared<Transform>());
+		sphere2->GetTransform()->SetLocalScale(Vec3(100.f, 100.f, 100.f));
+		sphere2->GetTransform()->SetLocalPosition(Vec3(0.f, 0.f, 150.f));
+		shared_ptr<MeshRenderer> meshRenderer2 = make_shared<MeshRenderer>();
+		{
+			shared_ptr<Mesh> sphereMesh2 = GET_SINGLE(Resources)->LoadCubeMesh();
+			meshRenderer2->SetMesh(sphereMesh2);
+		}
+		{
+			shared_ptr<Shader> shader2 = make_shared<Shader>();
+			shared_ptr<Texture> texture2 = make_shared<Texture>();
+			shared_ptr<Texture> texture22 = make_shared<Texture>();
+			shader2->Init(L"..\\Resources\\Shader\\default.hlsli");
+			texture2->Init(L"..\\Resources\\Texture\\Leather.jpg");
+			texture22->Init(L"..\\Resources\\Texture\\Leather_Normal.jpg");
+			shared_ptr<Material> material2 = make_shared<Material>();
+			material2->SetShader(shader2);
+			material2->SetTexture(0, texture2);
+			material2->SetTexture(1, texture22);
+			meshRenderer2->SetMaterial(material2);
+		}
+		sphere2->AddComponent(meshRenderer2);
+		scene->AddGameObject(sphere2);
+	}
+#pragma endregion
+
+#pragma region Green Directional Light
+	{
+		shared_ptr<GameObject> light = make_shared<GameObject>();
+		light->AddComponent(make_shared<Transform>());
+		//light->GetTransform()->SetLocalPosition(Vec3(0.f, 150.f, 150.f));
+		light->AddComponent(make_shared<Light>());
+		light->GetLight()->SetLightDirection(Vec3(1.f, 0.f, 1.f));
+		light->GetLight()->SetLightType(LIGHT_TYPE::DIRECTIONAL_LIGHT);
+		light->GetLight()->SetDiffuse(Vec3(0.5f, 0.5f, 0.5f));
+		light->GetLight()->SetAmbient(Vec3(0.1f, 0.1f, 0.1f));
+		light->GetLight()->SetSpecular(Vec3(0.3f, 0.3f, 0.3f));
+
+		scene->AddGameObject(light);
+	}
+
 #pragma endregion
 
 #pragma region Green Directional Light
