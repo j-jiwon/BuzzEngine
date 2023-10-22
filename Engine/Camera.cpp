@@ -32,6 +32,8 @@ void Camera::FinalUpdate()
 
 	S_MatView = _matView;
 	S_MatProjection = _matProjection;
+
+	_frustrum.FinalUpdate();
 }
 
 void Camera::Render()
@@ -46,6 +48,16 @@ void Camera::Render()
 		// mesh renderer 있는 친구들만 그려준다
 		if (gameObject->GetMeshRenderer() == nullptr)
 			continue;
+
+		if (gameObject->GetCheckFrustrum())
+		{
+			if (_frustrum.ContainsSphere(
+				gameObject->GetTransform()->GetWorldPosition(),
+				gameObject->GetTransform()->GetBoundingSphereRadius()) == false)
+			{
+				continue;
+			}
+		}
 
 		gameObject->GetMeshRenderer()->Render();
 	}
