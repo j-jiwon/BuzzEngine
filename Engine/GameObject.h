@@ -28,12 +28,12 @@ public:
 
 	void AddComponent(shared_ptr<Component> component);
 
-	bool GetCheckFrustrum() { return _checkFrustrum; }
-	void SetCheckFrustrum(bool check) { _checkFrustrum = check; }
+	bool GetCheckFrustum() { return _checkFrustum; }
+	void SetCheckFrustum(bool check) { _checkFrustum = check; }
 
 private:
 	array<shared_ptr<Component>, FIXED_COMPONENT_COUNT> _components;
 	vector<shared_ptr<MonoBehaviour>> _scripts;
 
-	bool _checkFrustrum = true;
+	bool _checkFrustum = true;
 };

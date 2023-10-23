@@ -7,14 +7,14 @@ void TableDescriptorHeap::Init(uint32 count)
 	_groupCount = count;
 
 	D3D12_DESCRIPTOR_HEAP_DESC desc = {};
-	desc.NumDescriptors = count * REGISTER_COUNT - 1;  //b0는 전역으로 사용
+	desc.NumDescriptors = count * (REGISTER_COUNT - 1);  //b0는 전역으로 사용
 	desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 
 	DEVICE->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&_descHeap));
 
 	_handleSize = DEVICE->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	_groupSize = _handleSize * REGISTER_COUNT - 1;  //b0는 전역으로 사용
+	_groupSize = _handleSize * (REGISTER_COUNT - 1);  //b0는 전역으로 사용
 }
 
 void TableDescriptorHeap::Clear()

@@ -33,7 +33,7 @@ void Camera::FinalUpdate()
 	S_MatView = _matView;
 	S_MatProjection = _matProjection;
 
-	_frustrum.FinalUpdate();
+	_frustum.FinalUpdate();
 }
 
 void Camera::Render()
@@ -49,9 +49,9 @@ void Camera::Render()
 		if (gameObject->GetMeshRenderer() == nullptr)
 			continue;
 
-		if (gameObject->GetCheckFrustrum())
+		if (gameObject->GetCheckFrustum())
 		{
-			if (_frustrum.ContainsSphere(
+			if (_frustum.ContainsSphere(
 				gameObject->GetTransform()->GetWorldPosition(),
 				gameObject->GetTransform()->GetBoundingSphereRadius()) == false)
 			{

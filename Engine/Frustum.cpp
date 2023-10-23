@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "Frustrum.h"
+#include "Frustum.h"
 #include "Camera.h"
 
-void Frustrum::FinalUpdate()
+void Frustum::FinalUpdate()
 {
 	Matrix matViewInv = Camera::S_MatView.Invert();
 	Matrix matProjectionInv = Camera::S_MatProjection.Invert();
@@ -28,7 +28,7 @@ void Frustrum::FinalUpdate()
 	_planes[PLANE_RIGHT] = ::XMPlaneFromPoints(worldPos[5], worldPos[6], worldPos[1]); // CCW
 }
 
-bool Frustrum::ContainsSphere(const Vec3& pos, float radius)
+bool Frustum::ContainsSphere(const Vec3& pos, float radius)
 {
 	for (const Vec4& plane : _planes)
 	{

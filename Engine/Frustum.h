@@ -11,7 +11,7 @@ enum PLANE_TYPE : uint8
 	PLANE_END
 };
 
-class Frustrum
+class Frustum
 {
 public:
 	void FinalUpdate();
